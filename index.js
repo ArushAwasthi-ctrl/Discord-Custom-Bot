@@ -1,6 +1,6 @@
-const dotenv = require('dotenv').config();
-const { log } = require('console');
-const { Client, Events, GatewayIntentBits, Message } = require('discord.js');
+import dotenv from 'dotenv'
+dotenv.config();
+import { Client, Events, GatewayIntentBits, Message }  from 'discord.js';
 const client = new Client({ intents: [GatewayIntentBits.Guilds , GatewayIntentBits.GuildMessages , GatewayIntentBits.MessageContent] });
 
 client.on('messageCreate', (message)=>{
@@ -16,4 +16,11 @@ client.on('messageCreate', (message)=>{
         content:'Hello from bot'
     })
 });
-client.login(`${process.env.Token}`);
+client.on('interactionCreate',interatction=>{
+    console.log(interatction);
+    interatction.reply({
+        content:"Pong"
+    });
+    
+})
+client.login(process.env.TOKEN);
